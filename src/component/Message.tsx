@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function Message() {
+export default function Message(props:{message:string}) {
   return (
-    <div>Chat</div>
+    <div>{props.message}</div>
   )
 }

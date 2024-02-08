@@ -1,7 +1,7 @@
 import { supabase } from "./initSupabase";
 
   // リアルタイムデータ更新
-  export const fetchRealtimeData = () => {
+  export const fetchRealtimeData = (setMassages:any) => {
     try {
       supabase
         .channel("table_postgres_changes") // 任意のチャンネル名
@@ -15,7 +15,7 @@ import { supabase } from "./initSupabase";
           (payload) => {
             // データ登録
             if (payload.eventType === "INSERT") {
-                console.log(payload.new);
+              setMassages((prevMassages:any) => [...prevMassages, payload.new.content]);
             }
           }
         )
@@ -27,14 +27,4 @@ import { supabase } from "./initSupabase";
       console.error(error);
     }
   };
-
-  export const addUser =async (massage:string ) => {
-    const { error } = await supabase
-        .from('message')
-        .insert({ content:massage })
-    if (error) {
-        console.log(error);
-        throw new Error(error.message)
-    }
-}
 

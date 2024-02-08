@@ -2,26 +2,23 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Message from './component/Message';
-import {fetchRealtimeData,addUser} from "./service/supabase/fetchRealtimeData"; 
+import {fetchRealtimeData} from "./service/supabase/fetchRealtimeData"; 
+import { addMassageDB } from './service/supabase/addMassage';
 
 function App() {
-  
 
   const [chatMs,setChatMs] = useState('');
+  const [massages,setMassages] = useState([]);
 
   useEffect(()=>{
-    fetchRealtimeData();
+    fetchRealtimeData(setMassages);
   },[]);
-
-  const test = ()=>{
-    console.log(chatMs);
-  }
 
   return (
     <div className="App">
       <input type="text" value={chatMs} onChange={(e)=>setChatMs(e.target.value)}></input>
-      <button onClick={()=>addUser("test")}>送信</button>
-      <Message/>
+      <button onClick={()=>addMassageDB(chatMs)}>送信</button>
+      {massages.map((ms,index)=> <Message message={ms} key={index}/>)}
     </div>
   );
 }
