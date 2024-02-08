@@ -1,3 +1,6 @@
+## 参考にした記事
+https://zenn.dev/chot/articles/ddd2844ad3ae61
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
